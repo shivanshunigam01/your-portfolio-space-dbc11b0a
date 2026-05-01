@@ -16,66 +16,86 @@ const Home = () => {
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="py-20 lg:py-32">
+      <section className="py-16 lg:py-24 relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-portfolio-primary/5 via-transparent to-portfolio-secondary/5" />
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl">
-            <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-8">
-              Hi, I'm <span className="text-portfolio-primary">Shivanshu</span>
-            </h1>
-            <p className="text-xl lg:text-2xl text-muted-foreground mb-8 leading-relaxed max-w-3xl">
-              I'm a Full Stack Developer who specializes in building scalable
-              web applications that serve millions of users. I work with modern
-              technologies like React.js, Node.js, and have experience in
-              government projects and renewable energy solutions.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: text */}
+            <div className="animate-fade-in">
+              <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-8">
+                Hi, I'm{" "}
+                <span className="gradient-text">Shivanshu</span>
+              </h1>
+              <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
+                I'm a Full Stack Developer who specializes in building scalable
+                web applications that serve millions of users. I work with modern
+                technologies like React.js, Node.js, and have experience in
+                government projects and renewable energy solutions.
+              </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Link to="/contact">
-                <Button
-                  size="lg"
-                  className="bg-portfolio-primary hover:bg-portfolio-primary/90 text-white"
+              <div className="flex flex-col sm:flex-row gap-4 mb-10">
+                <Link to="/contact">
+                  <Button
+                    size="lg"
+                    className="btn-gradient text-white border-0 shadow-lg"
+                  >
+                    Get In Touch
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+
+                <a
+                  href="https://drive.google.com/uc?export=download&id=1BIn7QQLYIkzfYVt0HlvMFQfCLTSxyfn9"
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Get In Touch
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
+                  <Button variant="outline" size="lg">
+                    <Download className="mr-2 h-4 w-4" />
+                    Download CV
+                  </Button>
+                </a>
+              </div>
 
-              <a
-                href="https://drive.google.com/uc?export=download&id=1BIn7QQLYIkzfYVt0HlvMFQfCLTSxyfn9"
-                download
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button variant="outline" size="lg">
-                  <Download className="mr-2 h-4 w-4" />
-                  Download CV
-                </Button>
-              </a>
+              <div className="flex gap-6">
+                <a
+                  href="https://github.com/shivanshunigam"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-portfolio-primary transition-colors"
+                >
+                  <Github className="h-6 w-6" />
+                </a>
+                <a
+                  href="https://linkedin.com/in/shivanshunigam"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-portfolio-primary transition-colors"
+                >
+                  <Linkedin className="h-6 w-6" />
+                </a>
+                <a
+                  href="mailto:shivanshunigam8@gmail.com"
+                  className="text-muted-foreground hover:text-portfolio-primary transition-colors"
+                >
+                  <Mail className="h-6 w-6" />
+                </a>
+              </div>
             </div>
 
-            <div className="flex gap-6">
-              <a
-                href="https://github.com/shivanshunigam"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-portfolio-primary transition-colors"
-              >
-                <Github className="h-6 w-6" />
-              </a>
-              <a
-                href="https://linkedin.com/in/shivanshunigam"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-portfolio-primary transition-colors"
-              >
-                <Linkedin className="h-6 w-6" />
-              </a>
-              <a
-                href="mailto:shivanshunigam8@gmail.com"
-                className="text-muted-foreground hover:text-portfolio-primary transition-colors"
-              >
-                <Mail className="h-6 w-6" />
-              </a>
+            {/* Right: hero video */}
+            <div className="relative animate-fade-in">
+              <div className="absolute -inset-4 bg-portfolio-gradient rounded-3xl blur-2xl opacity-20" />
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-border/50 bg-card">
+                <video
+                  src="/hero.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-auto object-cover aspect-video"
+                />
+              </div>
             </div>
           </div>
         </div>
