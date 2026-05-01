@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
 
 @layer base {
   :root {
@@ -36,23 +34,60 @@ All colors MUST be HSL.
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Enhanced Portfolio Colors - Vibrant & Modern */
+    --portfolio-primary: 268 83% 58%; /* Purple */
+    --portfolio-secondary: 217 91% 60%; /* Blue */
+    --portfolio-accent: 142 69% 58%; /* Green */
+    --portfolio-warning: 43 96% 56%; /* Yellow */
+    --portfolio-error: 0 84% 60%; /* Red */
+    --portfolio-success: 142 69% 58%; /* Green */
+    --portfolio-info: 199 89% 48%; /* Cyan */
+    --portfolio-pink: 330 81% 60%; /* Pink */
+    --portfolio-orange: 25 95% 53%; /* Orange */
+    --portfolio-indigo: 239 84% 67%; /* Indigo */
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Gradient combinations */
+    --portfolio-gradient-primary: linear-gradient(
+      135deg,
+      hsl(268 83% 58%),
+      hsl(217 91% 60%)
+    );
+    --portfolio-gradient-secondary: linear-gradient(
+      135deg,
+      hsl(142 69% 58%),
+      hsl(199 89% 48%)
+    );
+    --portfolio-gradient-accent: linear-gradient(
+      135deg,
+      hsl(330 81% 60%),
+      hsl(25 95% 53%)
+    );
+    --portfolio-gradient-rainbow: linear-gradient(
+      135deg,
+      hsl(268 83% 58%),
+      hsl(217 91% 60%),
+      hsl(142 69% 58%),
+      hsl(25 95% 53%)
+    );
+    /* Enhanced Portfolio Colors - Vibrant & Modern */
+    --portfolio-primary: 268 83% 58%; /* Purple */
+    --portfolio-secondary: 217 91% 60%; /* Blue */
+    --portfolio-accent: 142 69% 58%; /* Green */
+    --portfolio-warning: 43 96% 56%; /* Yellow */
+    --portfolio-error: 0 84% 60%; /* Red */
+    --portfolio-success: 142 69% 58%; /* Green */
+    --portfolio-info: 199 89% 48%; /* Cyan */
+    --portfolio-pink: 330 81% 60%; /* Pink */
+    --portfolio-orange: 25 95% 53%; /* Orange */
+    --portfolio-indigo: 239 84% 67%; /* Indigo */
+    
+    /* Gradient combinations */
+    --portfolio-gradient-primary: linear-gradient(135deg, hsl(268 83% 58%), hsl(217 91% 60%));
+    --portfolio-gradient-secondary: linear-gradient(135deg, hsl(142 69% 58%), hsl(199 89% 48%));
+    --portfolio-gradient-accent: linear-gradient(135deg, hsl(330 81% 60%), hsl(25 95% 53%));
+    --portfolio-gradient-rainbow: linear-gradient(135deg, hsl(268 83% 58%), hsl(217 91% 60%), hsl(142 69% 58%), hsl(25 95% 53%));
   }
 
   .dark {
@@ -83,14 +118,15 @@ All colors MUST be HSL.
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Dark mode portfolio colors - slightly adjusted for better contrast */
+    --portfolio-primary: 268 83% 65%;
+    --portfolio-secondary: 217 91% 65%;
+    --portfolio-accent: 142 69% 65%;
+    --portfolio-warning: 43 96% 65%;
+    --portfolio-pink: 330 81% 65%;
+    --portfolio-orange: 25 95% 60%;
+    --portfolio-indigo: 239 84% 72%;
   }
 }
 
@@ -101,5 +137,236 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+}
+
+/* Enhanced animations with color transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  0% { transform: translateX(50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes colorShift {
+  0%, 100% { 
+    background: linear-gradient(135deg, hsl(268 83% 58%), hsl(217 91% 60%));
+  }
+  25% { 
+    background: linear-gradient(135deg, hsl(217 91% 60%), hsl(142 69% 58%));
+  }
+  50% { 
+    background: linear-gradient(135deg, hsl(142 69% 58%), hsl(25 95% 53%));
+  }
+  75% { 
+    background: linear-gradient(135deg, hsl(25 95% 53%), hsl(330 81% 60%));
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInFromLeft 0.8s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInFromRight 0.8s ease-out;
+}
+
+.animate-color-shift {
+  animation: colorShift 8s ease-in-out infinite;
+  background-size: 200% 200%;
+}
+
+/* Enhanced hover effects with colors */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(142, 69, 133, 0.2);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px hsl(var(--portfolio-primary) / 0.3);
+}
+
+/* Enhanced text gradients */
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--portfolio-primary)),
+    hsl(var(--portfolio-secondary))
+  );
+  background: linear-gradient(135deg, hsl(var(--portfolio-primary)), hsl(var(--portfolio-secondary)));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-rainbow {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--portfolio-primary)),
+    hsl(var(--portfolio-secondary)),
+    hsl(var(--portfolio-accent)),
+    hsl(var(--portfolio-pink))
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: colorShift 6s ease-in-out infinite;
+}
+
+/* Colorful section backgrounds */
+.bg-gradient-primary {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--portfolio-primary) / 0.1),
+    hsl(var(--portfolio-secondary) / 0.1)
+  );
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--portfolio-accent) / 0.1),
+    hsl(var(--portfolio-info) / 0.1)
+  );
+}
+
+.bg-gradient-accent {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--portfolio-pink) / 0.1),
+    hsl(var(--portfolio-orange) / 0.1)
+  );
+}
+
+/* Enhanced section dividers with color */
+.gradient-text-rainbow {
+  background: linear-gradient(135deg, 
+    hsl(var(--portfolio-primary)), 
+    hsl(var(--portfolio-secondary)), 
+    hsl(var(--portfolio-accent)), 
+    hsl(var(--portfolio-pink))
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: colorShift 6s ease-in-out infinite;
+}
+
+/* Colorful section backgrounds */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, hsl(var(--portfolio-primary) / 0.1), hsl(var(--portfolio-secondary) / 0.1));
+}
+
+.bg-gradient-secondary {
+  background: linear-gradient(135deg, hsl(var(--portfolio-accent) / 0.1), hsl(var(--portfolio-info) / 0.1));
+}
+
+.bg-gradient-accent {
+  background: linear-gradient(135deg, hsl(var(--portfolio-pink) / 0.1), hsl(var(--portfolio-orange) / 0.1));
+}
+
+/* Enhanced section dividers with color */
+.section-divider {
+  border-bottom: 2px solid;
+  border-image: linear-gradient(
+      90deg,
+      hsl(var(--portfolio-primary)),
+      hsl(var(--portfolio-secondary)),
+      hsl(var(--portfolio-accent))
+    )
+    1;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, 
+    hsl(var(--portfolio-primary)), 
+    hsl(var(--portfolio-secondary)), 
+    hsl(var(--portfolio-accent))
+  ) 1;
+}
+
+/* Colorful focus states */
+.focus-visible:focus-visible {
+  outline: 2px solid hsl(var(--portfolio-primary));
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px hsl(var(--portfolio-primary) / 0.2);
+}
+
+/* Colorful button variants */
+.btn-gradient {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--portfolio-primary)),
+    hsl(var(--portfolio-secondary))
+  );
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--portfolio-secondary)),
+    hsl(var(--portfolio-accent))
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px hsl(var(--portfolio-primary) / 0.3);
+  box-shadow: 0 0 0 4px hsl(var(--portfolio-primary) / 0.2);
+}
+
+/* Colorful button variants */
+.btn-gradient {
+  background: linear-gradient(135deg, hsl(var(--portfolio-primary)), hsl(var(--portfolio-secondary)));
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  background: linear-gradient(135deg, hsl(var(--portfolio-secondary)), hsl(var(--portfolio-accent)));
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px hsl(var(--portfolio-primary) / 0.3);
 }
