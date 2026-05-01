@@ -14,88 +14,96 @@ import myPhoto from "../pages/my_image.png";
 
 const Home = () => {
   return (
-    <div className="min-h-screen pt-16">
-      {/* Hero Section */}
-      <section className="py-16 lg:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-portfolio-primary/5 via-transparent to-portfolio-secondary/5" />
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left: text */}
-            <div className="animate-fade-in">
-              <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-8">
-                Hi, I'm{" "}
-                <span className="gradient-text">Shivanshu</span>
-              </h1>
-              <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
-                I'm a Full Stack Developer who specializes in building scalable
-                web applications that serve millions of users. I work with modern
-                technologies like React.js, Node.js, and have experience in
-                government projects and renewable energy solutions.
-              </p>
+    <div className="min-h-screen">
+      {/* Full-screen Video Hero */}
+      <section className="relative h-screen w-full overflow-hidden">
+        <video
+          src="/hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* Gradient overlays for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent" />
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-10">
+        {/* Hero text overlay */}
+        <div className="relative z-10 h-full flex items-center">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl animate-fade-in">
+              <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6 text-foreground drop-shadow-lg">
+                Hi, I'm <span className="gradient-text">Shivanshu</span>
+              </h1>
+              <p className="text-lg lg:text-xl text-foreground/90 mb-8 leading-relaxed max-w-2xl drop-shadow">
+                Full Stack Developer building scalable web applications that
+                serve millions of users.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link to="/contact">
-                  <Button
-                    size="lg"
-                    className="btn-gradient text-white border-0 shadow-lg"
-                  >
+                  <Button size="lg" className="btn-gradient text-white border-0 shadow-xl">
                     Get In Touch
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-
                 <a
                   href="https://drive.google.com/uc?export=download&id=1BIn7QQLYIkzfYVt0HlvMFQfCLTSxyfn9"
                   download
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Button variant="outline" size="lg">
+                  <Button variant="outline" size="lg" className="backdrop-blur-sm bg-background/30">
                     <Download className="mr-2 h-4 w-4" />
                     Download CV
                   </Button>
                 </a>
               </div>
-
-              <div className="flex gap-6">
-                <a
-                  href="https://github.com/shivanshunigam"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-portfolio-primary transition-colors"
-                >
-                  <Github className="h-6 w-6" />
-                </a>
-                <a
-                  href="https://linkedin.com/in/shivanshunigam"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-portfolio-primary transition-colors"
-                >
-                  <Linkedin className="h-6 w-6" />
-                </a>
-                <a
-                  href="mailto:shivanshunigam8@gmail.com"
-                  className="text-muted-foreground hover:text-portfolio-primary transition-colors"
-                >
-                  <Mail className="h-6 w-6" />
-                </a>
-              </div>
             </div>
+          </div>
+        </div>
 
-            {/* Right: hero video */}
-            <div className="relative animate-fade-in">
-              <div className="absolute -inset-4 bg-portfolio-gradient rounded-3xl blur-2xl opacity-20" />
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-border/50 bg-card">
-                <video
-                  src="/hero.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-auto object-cover aspect-video"
-                />
-              </div>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+          <div className="w-6 h-10 rounded-full border-2 border-foreground/40 flex justify-center pt-2">
+            <div className="w-1 h-2 rounded-full bg-foreground/60" />
+          </div>
+        </div>
+      </section>
+
+      {/* Intro Section (below hero) */}
+      <section className="py-20 border-b border-border/50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl">
+            <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
+              I'm a Full Stack Developer who specializes in building scalable
+              web applications that serve millions of users. I work with modern
+              technologies like React.js, Node.js, and have experience in
+              government projects and renewable energy solutions.
+            </p>
+            <div className="flex gap-6">
+              <a
+                href="https://github.com/shivanshunigam"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-portfolio-primary transition-colors"
+              >
+                <Github className="h-6 w-6" />
+              </a>
+              <a
+                href="https://linkedin.com/in/shivanshunigam"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-portfolio-primary transition-colors"
+              >
+                <Linkedin className="h-6 w-6" />
+              </a>
+              <a
+                href="mailto:shivanshunigam8@gmail.com"
+                className="text-muted-foreground hover:text-portfolio-primary transition-colors"
+              >
+                <Mail className="h-6 w-6" />
+              </a>
             </div>
           </div>
         </div>
