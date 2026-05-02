@@ -235,6 +235,92 @@ const gradientPalette = [
   "from-yellow-500 via-orange-500 to-red-500",
 ];
 
+// Multiple screenshot providers — if one fails, we fall through to the next.
+const buildScreenshotSources = (url: string): string[] => {
+  const encoded = encodeURIComponent(url);
+  const clean = url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  return [
+    // WordPress mShots — free, no key, server-rendered (very reliable)
+    `https://s.wordpress.com/mshots/v1/${encoded}?w=1280&h=800`,
+    // Microlink free screenshot CDN
+    `https://api.microlink.io/?url=${encoded}&screenshot=true&meta=false&embed=screenshot.url&waitFor=3000&viewport.width=1440&viewport.height=900`,
+    // Thum.io fallback with longer wait
+    `https://image.thum.io/get/width/1280/wait/10/viewportWidth/1440/https://${clean}`,
+  ];
+};
+
+interface PreviewProps {
+  url: string;
+  title: string;
+  gradient: string;
+}
+
+const ProjectPreview = ({ url, title, gradient }: PreviewProps) => {
+  const sources = buildScreenshotSources(url);
+  const [srcIndex, setSrcIndex] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const initials = title
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`relative block aspect-[16/10] overflow-hidden bg-gradient-to-br ${gradient}`}
+    >
+      {/* Skeleton shimmer while loading */}
+      {!loaded && !failed && (
+        <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-muted/40 to-muted/10" />
+      )}
+
+      {/* Initials fallback if all sources fail */}
+      {failed && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-6xl font-black text-white/90 drop-shadow-lg tracking-tight">
+            {initials}
+          </span>
+        </div>
+      )}
+
+      {!failed && (
+        <img
+          key={sources[srcIndex]}
+          src={sources[srcIndex]}
+          alt={`${title} live preview`}
+          loading="lazy"
+          onLoad={(e) => {
+            // mshots returns a tiny ~400px placeholder while it generates — retry next provider
+            const img = e.currentTarget;
+            if (img.naturalWidth > 0 && img.naturalWidth < 500 && srcIndex < sources.length - 1) {
+              setSrcIndex(srcIndex + 1);
+              return;
+            }
+            setLoaded(true);
+          }}
+          onError={() => {
+            if (srcIndex < sources.length - 1) {
+              setSrcIndex(srcIndex + 1);
+            } else {
+              setFailed(true);
+            }
+          }}
+          className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-700 group-hover:scale-[1.03] ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      )}
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-70 group-hover:opacity-40 transition-opacity pointer-events-none" />
+    </a>
+  );
+};
+
 const Projects = () => {
   return (
     <div className="min-h-screen pt-24 pb-20">
