@@ -255,7 +255,8 @@ const Projects = () => {
           {projects.map((project, idx) => {
             const gradient = gradientPalette[idx % gradientPalette.length];
             const cleanUrl = project.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
-            const screenshotUrl = `https://image.thum.io/get/width/1200/crop/750/noanimate/https://${cleanUrl}`;
+            // wait/{ms} ensures the page is fully loaded; viewport + fit gives a true 1:1 capture
+            const screenshotUrl = `https://image.thum.io/get/width/1200/wait/8/viewportWidth/1440/https://${cleanUrl}`;
             return (
               <Card
                 key={project.title}
