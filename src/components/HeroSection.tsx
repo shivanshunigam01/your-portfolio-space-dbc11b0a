@@ -1,44 +1,104 @@
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowRight, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { HeroTypewriterHeadline } from "@/components/HeroTypewriterHeadline";
+import { cn } from "@/lib/utils";
 
 const CV_URL =
   "https://drive.google.com/uc?export=download&id=1BIn7QQLYIkzfYVt0HlvMFQfCLTSxyfn9";
 
+const FALLBACK_MS = 12_000;
+
+type HeroSectionProps = {
+  /** Fires once the hero video can play; use to reveal content below the fold */
+  onVideoReady?: () => void;
+};
+
 /**
- * Full-viewport hero with video background, dark overlay, and rotating full-line typewriter.
+ * Full-viewport hero with video background. Video loads first; overlays and copy
+ * fade in after the file is ready to play (with a timeout fallback).
  */
-const HeroSection = () => {
+const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const unlocked = useRef(false);
+  const [videoReady, setVideoReady] = useState(false);
+
+  const unlock = useCallback(() => {
+    if (unlocked.current) return;
+    unlocked.current = true;
+    setVideoReady(true);
+    onVideoReady?.();
+  }, [onVideoReady]);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    el.play().catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const t = window.setTimeout(unlock, FALLBACK_MS);
+    return () => window.clearTimeout(t);
+  }, [unlock]);
+
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-black">
-      {/* Background video */}
       <video
+        ref={videoRef}
+        aria-hidden
         src="/hero.mp4"
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
         className="absolute inset-0 h-full w-full object-cover"
+        onLoadedData={() => videoRef.current?.play().catch(() => {})}
+        onCanPlayThrough={unlock}
+        onPlaying={unlock}
       />
 
-      {/* Dark overlays — SaaS-style readability */}
-      <div className="absolute inset-0 bg-black/55" aria-hidden />
       <div
-        className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-black/25"
+        className={cn(
+          "absolute inset-0 bg-black/55 transition-opacity duration-1000 ease-out",
+          videoReady ? "opacity-100" : "opacity-0",
+        )}
         aria-hidden
       />
       <div
-        className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/30"
+        className={cn(
+          "absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-black/25 transition-opacity duration-1000 ease-out",
+          videoReady ? "opacity-100" : "opacity-0",
+        )}
+        aria-hidden
+      />
+      <div
+        className={cn(
+          "absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/30 transition-opacity duration-1000 ease-out",
+          videoReady ? "opacity-100" : "opacity-0",
+        )}
         aria-hidden
       />
 
-      {/* Content */}
-      <div className="relative z-10 flex min-h-screen items-center">
+      <div
+        className={cn(
+          "relative z-10 flex min-h-screen items-center transition-opacity duration-1000 ease-out motion-reduce:transition-none",
+          videoReady ? "opacity-100" : "opacity-0",
+        )}
+      >
         <div className="container mx-auto w-full px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl animate-fade-in text-left">
+          <div className="max-w-4xl text-left">
             <div className="w-full min-w-0 overflow-x-auto pb-1 [-webkit-overflow-scrolling:touch] sm:overflow-visible">
-              <HeroTypewriterHeadline />
+              {videoReady ? (
+                <div className="animate-fade-in">
+                  <HeroTypewriterHeadline />
+                </div>
+              ) : (
+                <h1 className="whitespace-nowrap text-4xl font-bold leading-[1.15] tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
+                  &nbsp;
+                </h1>
+              )}
             </div>
 
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[rgba(255,255,255,0.92)] drop-shadow-md sm:text-xl md:text-2xl">

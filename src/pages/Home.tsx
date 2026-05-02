@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   ArrowRight,
   Download,
@@ -14,10 +15,14 @@ import HeroSection from "@/components/HeroSection";
 import myPhoto from "../pages/my_image.png";
 
 const Home = () => {
+  const [showRestOfPage, setShowRestOfPage] = useState(false);
+
   return (
     <div className="min-h-screen">
-      <HeroSection />
+      <HeroSection onVideoReady={() => setShowRestOfPage(true)} />
 
+      {showRestOfPage && (
+        <div className="animate-fade-in">
       {/* Intro Section (below hero) */}
       <section className="py-20 border-b border-border/50">
         <div className="container mx-auto px-4">
@@ -340,6 +345,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+        </div>
+      )}
     </div>
   );
 };

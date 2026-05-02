@@ -10,12 +10,20 @@ interface Project {
   tech: string[];
   description: string;
   features: string[];
+  /** Served from /public/projects — omit to use live thumbnail fallback */
+  previewImage?: string;
+}
+
+function liveThumbnailUrl(siteUrl: string): string {
+  const cleanUrl = siteUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  return `https://image.thum.io/get/width/1200/crop/750/noanimate/https://${cleanUrl}`;
 }
 
 const projects: Project[] = [
   {
     title: "Punya Autowheels Platform",
     category: "Automobile",
+    previewImage: "/projects/punya.png",
     url: "https://www.punyaautowheels.com/",
     tech: ["React.js", "Node.js", "Express.js", "MySQL", "AWS"],
     description:
@@ -31,6 +39,7 @@ const projects: Project[] = [
   {
     title: "Vikramshila Automobiles",
     category: "Automobile",
+    previewImage: "/projects/vikramshila.png",
     url: "https://www.vikramshilaautomobiles.com/",
     tech: ["React.js", "Next.js", "Node.js"],
     description:
@@ -45,6 +54,7 @@ const projects: Project[] = [
   {
     title: "Patliputra VinFast",
     category: "EV",
+    previewImage: "/projects/patliputravinfast.png",
     url: "https://patliputravinfast.in/",
     tech: ["Next.js", "React.js", "REST APIs"],
     description:
@@ -59,6 +69,7 @@ const projects: Project[] = [
   {
     title: "Patliputra Group",
     category: "Corporate",
+    previewImage: "/projects/patliputragroup.png",
     url: "https://patliputragroup.com/",
     tech: ["React.js", "Node.js"],
     description:
@@ -73,6 +84,7 @@ const projects: Project[] = [
   {
     title: "Nanak Accountants",
     category: "Finance",
+    previewImage: "/projects/nanak-accountants.png",
     url: "https://nanakaccountants.com.au/",
     tech: ["Next.js", "React.js"],
     description:
@@ -87,6 +99,7 @@ const projects: Project[] = [
   {
     title: "Amar Jyoti Upload System",
     category: "Tools",
+    previewImage: "/projects/amarjyoti.png",
     url: "https://amarjyoti-flax.vercel.app/upload",
     tech: ["React.js", "Node.js", "Cloud Storage"],
     description:
@@ -101,6 +114,7 @@ const projects: Project[] = [
   {
     title: "ZForce EV",
     category: "EV",
+    previewImage: "/projects/zforceev.png",
     url: "https://www.zforceev.com/",
     tech: ["Next.js", "React.js"],
     description:
@@ -115,6 +129,7 @@ const projects: Project[] = [
   {
     title: "Luxury Bus Rental",
     category: "Travel",
+    previewImage: "/projects/luxury-bus-rental.png",
     url: "https://www.luxurybusrental.in/",
     tech: ["React.js", "Node.js"],
     description:
@@ -129,6 +144,7 @@ const projects: Project[] = [
   {
     title: "Derxo Platform",
     category: "SaaS",
+    previewImage: "/projects/derxo.png",
     url: "https://www.derxo.com/",
     tech: ["Next.js", "Node.js"],
     description:
@@ -143,6 +159,7 @@ const projects: Project[] = [
   {
     title: "True Hospitals",
     category: "Healthcare",
+    previewImage: "/projects/true-hospitals.png",
     url: "https://truehospitals.com/",
     tech: ["React.js", "Next.js"],
     description:
@@ -185,6 +202,7 @@ const projects: Project[] = [
   {
     title: "Zentroverse",
     category: "Enterprise",
+    previewImage: "/projects/zentroverse.png",
     url: "https://www.zentroverse.com",
     tech: ["React.js", "Node.js", "AWS", "DevOps"],
     description:
@@ -199,6 +217,7 @@ const projects: Project[] = [
   {
     title: "Neuro Vihar Digital",
     category: "Healthcare",
+    previewImage: "/projects/neuro-vihar.png",
     url: "https://neuro-vihar-digital-58.vercel.app/",
     tech: ["Next.js", "React.js"],
     description:
@@ -241,7 +260,7 @@ const Projects = () => {
         {/* Header */}
         <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
           <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-            <span className="gradient-text">🚀 Featured Projects</span>
+            <span className="gradient-text">Featured Projects</span>
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
             Production-grade applications built across multiple industries
@@ -254,8 +273,8 @@ const Projects = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {projects.map((project, idx) => {
             const gradient = gradientPalette[idx % gradientPalette.length];
-            const cleanUrl = project.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
-            const screenshotUrl = `https://image.thum.io/get/width/1200/crop/750/noanimate/https://${cleanUrl}`;
+            const previewSrc =
+              project.previewImage ?? liveThumbnailUrl(project.url);
             return (
               <Card
                 key={project.title}
@@ -266,18 +285,19 @@ const Projects = () => {
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`relative block h-56 overflow-hidden bg-gradient-to-br ${gradient}`}
+                  className={`relative block aspect-[16/10] min-h-[200px] overflow-hidden rounded-t-2xl bg-gradient-to-br ${gradient}`}
                 >
                   <img
-                    src={screenshotUrl}
+                    src={previewSrc}
                     alt={`${project.title} preview`}
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).style.display = "none";
                     }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/20 opacity-80 group-hover:opacity-60 transition-opacity" />
+                  <div className="pointer-events-none absolute inset-0 rounded-t-2xl ring-1 ring-inset ring-black/5 dark:ring-white/10" />
                   <div className="absolute top-4 left-4 z-10">
                     <Badge
                       className={`${categoryStyles[project.category] ?? "bg-white/90 text-slate-800"} border-0 font-semibold shadow-sm`}
