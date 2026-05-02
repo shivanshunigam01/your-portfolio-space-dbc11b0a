@@ -8,6 +8,9 @@ import { cn } from "@/lib/utils";
 const CV_URL =
   "https://drive.google.com/uc?export=download&id=14GSpMlwrVeJwUTsOtCt60HLvgSkqAYJj";
 
+/** Two hero clips play back-to-back in a loop (files in /public). */
+const HERO_SOURCES = ["/hero-1.mp4", "/hero-2.mp4"] as const;
+
 const FALLBACK_MS = 12_000;
 
 type HeroSectionProps = {
@@ -20,9 +23,11 @@ type HeroSectionProps = {
  * fade in after the file is ready to play (with a timeout fallback).
  */
 const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRefs = useRef<Array<HTMLVideoElement | null>>([null, null]);
   const unlocked = useRef(false);
   const [videoReady, setVideoReady] = useState(false);
+  /** Which clip (0 or 1) is currently visible and playing */
+  const [activeLayer, setActiveLayer] = useState(0);
 
   const unlock = useCallback(() => {
     if (unlocked.current) return;
@@ -31,8 +36,20 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
     onVideoReady?.();
   }, [onVideoReady]);
 
+  const advanceClip = useCallback(() => {
+    const next = activeLayer === 0 ? 1 : 0;
+    const cur = videoRefs.current[activeLayer];
+    const nxt = videoRefs.current[next];
+    cur?.pause();
+    if (nxt) {
+      nxt.currentTime = 0;
+      nxt.play().catch(() => {});
+    }
+    setActiveLayer(next);
+  }, [activeLayer]);
+
   useEffect(() => {
-    const el = videoRef.current;
+    const el = videoRefs.current[0];
     if (!el) return;
     el.play().catch(() => {});
   }, []);
@@ -44,20 +61,35 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
 
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-black">
-      <video
-        ref={videoRef}
-        aria-hidden
-        src="/hero.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        className="absolute inset-0 h-full w-full object-cover"
-        onLoadedData={() => videoRef.current?.play().catch(() => {})}
-        onCanPlayThrough={unlock}
-        onPlaying={unlock}
-      />
+      {HERO_SOURCES.map((src, i) => (
+        <video
+          key={src}
+          ref={(el) => {
+            videoRefs.current[i] = el;
+          }}
+          aria-hidden
+          src={src}
+          autoPlay={i === 0}
+          muted
+          playsInline
+          preload="auto"
+          className={cn(
+            "absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out",
+            activeLayer === i ? "z-[2] opacity-100" : "z-[1] opacity-0",
+          )}
+          onLoadedData={() => {
+            if (i === activeLayer) {
+              videoRefs.current[i]?.play().catch(() => {});
+            }
+          }}
+          onCanPlayThrough={unlock}
+          onPlaying={unlock}
+          onEnded={() => {
+            if (i !== activeLayer) return;
+            advanceClip();
+          }}
+        />
+      ))}
 
       <div
         className={cn(
