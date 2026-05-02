@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   ArrowRight,
   Download,
+  ExternalLink,
   Github,
   Linkedin,
   Mail,
@@ -114,6 +115,64 @@ const Home = () => {
           </h2>
           <div className="max-w-4xl mx-auto">
             <div className="space-y-8">
+              {/* Travelodeal Holidays */}
+              <Card className="p-8">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                  <div>
+                    <h3 className="text-xl font-semibold">
+                      Software Engineer
+                    </h3>
+                    <p className="text-portfolio-primary font-medium">
+                      Travelodeal Holidays
+                    </p>
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    Oct 15, 2025 - Present
+                  </div>
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  Building travel and holiday products with React, Next.js,
+                  Node.js, and Express on AWS—shipping features reliably with
+                  cloud infrastructure and DevOps practices. Primary product:{" "}
+                  <a
+                    href="https://www.travelodeal.co.uk/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-portfolio-primary hover:underline inline-flex items-center gap-1"
+                  >
+                    travelodeal.co.uk
+                    <ExternalLink className="h-3.5 w-3.5 shrink-0" />
+                  </a>
+                  .
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                  <div>
+                    <div className="font-semibold text-portfolio-primary">
+                      React · Next.js
+                    </div>
+                    <div className="text-muted-foreground">
+                      Frontend & SSR
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-portfolio-primary">
+                      Node · Express
+                    </div>
+                    <div className="text-muted-foreground">
+                      APIs & services
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-portfolio-primary">
+                      AWS · DevOps
+                    </div>
+                    <div className="text-muted-foreground">
+                      Cloud & delivery
+                    </div>
+                  </div>
+                </div>
+              </Card>
+
               {/* 200Ok Solutions */}
               <Card className="p-8">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">

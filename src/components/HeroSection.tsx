@@ -6,7 +6,7 @@ import { HeroTypewriterHeadline } from "@/components/HeroTypewriterHeadline";
 import { cn } from "@/lib/utils";
 
 const CV_URL =
-  "https://drive.google.com/uc?export=download&id=1BIn7QQLYIkzfYVt0HlvMFQfCLTSxyfn9";
+  "https://drive.google.com/uc?export=download&id=14GSpMlwrVeJwUTsOtCt60HLvgSkqAYJj";
 
 const FALLBACK_MS = 12_000;
 

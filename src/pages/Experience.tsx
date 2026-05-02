@@ -8,10 +8,67 @@ import {
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
+type KeyProject = {
+  name: string;
+  description: string;
+  impact: string;
+  url?: string;
+};
+
 const Experience = () => {
-  const experiences = [
+  const experiences: Array<{
+    id: number;
+    company: string;
+    role: string;
+    location: string;
+    period: string;
+    type: string;
+    description: string;
+    projects: KeyProject[];
+    technologies: string[];
+    achievements: string[];
+  }> = [
     {
       id: 1,
+      company: "Travelodeal Holidays",
+      role: "Software Engineer",
+      location: "India",
+      period: "Oct 15, 2025 - Present",
+      type: "Current",
+      description:
+        "Building and evolving cloud-hosted travel and holiday products end to end: performant frontends, scalable APIs, and reliable deployments across AWS and modern DevOps workflows.",
+      projects: [
+        {
+          name: "Travelodeal UK (travel & holidays platform)",
+          description:
+            "UK travel-domain product: holiday search, offers, and customer journeys for a live production site serving the travel market.",
+          impact:
+            "Core product development on a high-visibility travel platform with full-stack and cloud delivery",
+          url: "https://www.travelodeal.co.uk/",
+        },
+      ],
+      technologies: [
+        "React",
+        "Next.js",
+        "Node.js",
+        "Express.js",
+        "TypeScript",
+        "REST APIs",
+        "AWS",
+        "Cloud",
+        "DevOps",
+        "Docker",
+        "CI/CD",
+        "Git",
+      ],
+      achievements: [
+        "Delivered features across full stack using React, Next.js, Node, and Express",
+        "Operated and improved cloud workloads on AWS with DevOps and automation focus",
+        "Collaborated on scalable architecture, APIs, and production reliability",
+      ],
+    },
+    {
+      id: 2,
       company: "200Ok Solutions",
       role: "Full Stack Developer",
       location: "Ahmedabad, India",
@@ -36,7 +93,7 @@ const Experience = () => {
       ],
     },
     {
-      id: 2,
+      id: 3,
       company: "AHA Solar Technologies Limited",
       role: "Software Development Engineer",
       location: "Ahmedabad, India",
@@ -79,7 +136,7 @@ const Experience = () => {
       ],
     },
     {
-      id: 3,
+      id: 4,
       company: "Scale AI",
       role: "AI Trainer",
       location: "San Francisco, CA (Remote)",
@@ -220,6 +277,17 @@ const Experience = () => {
                                   <div className="text-xs text-portfolio-primary font-medium">
                                     Impact: {project.impact}
                                   </div>
+                                  {project.url && (
+                                    <a
+                                      href={project.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-portfolio-primary hover:underline"
+                                    >
+                                      <ExternalLink className="h-3 w-3 shrink-0" />
+                                      {project.url.replace(/^https?:\/\//, "")}
+                                    </a>
+                                  )}
                                 </div>
                               </div>
                             </div>

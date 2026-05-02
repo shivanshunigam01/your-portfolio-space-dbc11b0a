@@ -17,6 +17,30 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Travelodeal UK",
+    category: "Travel",
+    url: "https://www.travelodeal.co.uk/",
+    tech: [
+      "Next.js",
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "TypeScript",
+      "REST APIs",
+      "AWS",
+      "DevOps",
+    ],
+    description:
+      "Travel-domain product for the UK market—holiday discovery, offers, and booking-oriented flows. Work spans the full stack and cloud delivery for a live production travel platform.",
+    features: [
+      "Travel & holiday-focused customer journeys",
+      "Modern React / Next.js frontend with scalable APIs",
+      "Cloud-hosted deployment and DevOps practices",
+      "Performance-oriented delivery for a public travel site",
+      "Integration with travel-domain content and services",
+    ],
+  },
+  {
     title: "Punya Autowheels Platform",
     category: "Automobile",
     previewImage: "/projects/punya.png",
