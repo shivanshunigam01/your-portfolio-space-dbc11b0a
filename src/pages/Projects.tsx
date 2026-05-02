@@ -285,13 +285,13 @@ const Projects = () => {
                       {project.category}
                     </Badge>
                   </div>
-                  <div className="absolute top-4 right-4">
+                  <div className="absolute top-4 right-4 z-10">
                     <Badge className="bg-green-500 hover:bg-green-500 text-white border-0 font-semibold shadow-sm gap-1.5">
                       <span className="h-2 w-2 rounded-full bg-white animate-pulse" />
                       Live
                     </Badge>
                   </div>
-                </div>
+                </a>
 
                 {/* Body */}
                 <div className="p-6 flex flex-col flex-1">
