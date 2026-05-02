@@ -113,7 +113,11 @@ export default {
 						transform: 'scale(1.05)',
 						opacity: '0.8'
 					}
-				}
+				},
+				'hero-cursor': {
+					'0%, 45%': { opacity: '1' },
+					'50%, 100%': { opacity: '0' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -121,7 +125,8 @@ export default {
 				float: 'float 6s ease-in-out infinite',
 				glow: 'glow 2s ease-in-out infinite',
 				'color-shift': 'color-shift 8s ease-in-out infinite',
-				'pulse-gentle': 'pulse 3s ease-in-out infinite'
+				'pulse-gentle': 'pulse 3s ease-in-out infinite',
+				'hero-cursor': 'hero-cursor 1.05s steps(1, end) infinite',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
