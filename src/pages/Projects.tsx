@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -234,6 +235,92 @@ const gradientPalette = [
   "from-yellow-500 via-orange-500 to-red-500",
 ];
 
+// Multiple screenshot providers — if one fails, we fall through to the next.
+const buildScreenshotSources = (url: string): string[] => {
+  const encoded = encodeURIComponent(url);
+  const clean = url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  return [
+    // WordPress mShots — free, no key, server-rendered (very reliable)
+    `https://s.wordpress.com/mshots/v1/${encoded}?w=1280&h=800`,
+    // Microlink free screenshot CDN
+    `https://api.microlink.io/?url=${encoded}&screenshot=true&meta=false&embed=screenshot.url&waitFor=3000&viewport.width=1440&viewport.height=900`,
+    // Thum.io fallback with longer wait
+    `https://image.thum.io/get/width/1280/wait/10/viewportWidth/1440/https://${clean}`,
+  ];
+};
+
+interface PreviewProps {
+  url: string;
+  title: string;
+  gradient: string;
+}
+
+const ProjectPreview = ({ url, title, gradient }: PreviewProps) => {
+  const sources = buildScreenshotSources(url);
+  const [srcIndex, setSrcIndex] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const initials = title
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`relative block aspect-[16/10] overflow-hidden bg-gradient-to-br ${gradient}`}
+    >
+      {/* Skeleton shimmer while loading */}
+      {!loaded && !failed && (
+        <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-muted/40 to-muted/10" />
+      )}
+
+      {/* Initials fallback if all sources fail */}
+      {failed && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-6xl font-black text-white/90 drop-shadow-lg tracking-tight">
+            {initials}
+          </span>
+        </div>
+      )}
+
+      {!failed && (
+        <img
+          key={sources[srcIndex]}
+          src={sources[srcIndex]}
+          alt={`${title} live preview`}
+          loading="lazy"
+          onLoad={(e) => {
+            // mshots returns a tiny ~400px placeholder while it generates — retry next provider
+            const img = e.currentTarget;
+            if (img.naturalWidth > 0 && img.naturalWidth < 500 && srcIndex < sources.length - 1) {
+              setSrcIndex(srcIndex + 1);
+              return;
+            }
+            setLoaded(true);
+          }}
+          onError={() => {
+            if (srcIndex < sources.length - 1) {
+              setSrcIndex(srcIndex + 1);
+            } else {
+              setFailed(true);
+            }
+          }}
+          className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-700 group-hover:scale-[1.03] ${
+            loaded ? "opacity-100" : "opacity-0"
+          }`}
+        />
+      )}
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-70 group-hover:opacity-40 transition-opacity pointer-events-none" />
+    </a>
+  );
+};
+
 const Projects = () => {
   return (
     <div className="min-h-screen pt-24 pb-20">
@@ -254,45 +341,28 @@ const Projects = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {projects.map((project, idx) => {
             const gradient = gradientPalette[idx % gradientPalette.length];
-            const cleanUrl = project.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
-            // wait/{ms} ensures the page is fully loaded; viewport + fit gives a true 1:1 capture
-            const screenshotUrl = `https://image.thum.io/get/width/1200/wait/8/viewportWidth/1440/https://${cleanUrl}`;
             return (
               <Card
                 key={project.title}
                 className="group overflow-hidden rounded-2xl border border-border/60 bg-card shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
               >
-                {/* Live website preview */}
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`relative block aspect-[16/10] overflow-hidden bg-gradient-to-br ${gradient}`}
-                >
-                  <img
-                    src={screenshotUrl}
-                    alt={`${project.title} preview`}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).style.display = "none";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-70 group-hover:opacity-40 transition-opacity" />
-                  <div className="absolute top-4 left-4 z-10">
+                {/* Live website preview with multi-provider fallback */}
+                <div className="relative">
+                  <ProjectPreview url={project.url} title={project.title} gradient={gradient} />
+                  <div className="absolute top-4 left-4 z-10 pointer-events-none">
                     <Badge
                       className={`${categoryStyles[project.category] ?? "bg-white/90 text-slate-800"} border-0 font-semibold shadow-sm`}
                     >
                       {project.category}
                     </Badge>
                   </div>
-                  <div className="absolute top-4 right-4 z-10">
+                  <div className="absolute top-4 right-4 z-10 pointer-events-none">
                     <Badge className="bg-green-500 hover:bg-green-500 text-white border-0 font-semibold shadow-sm gap-1.5">
                       <span className="h-2 w-2 rounded-full bg-white animate-pulse" />
                       Live
                     </Badge>
                   </div>
-                </a>
+                </div>
 
                 {/* Body */}
                 <div className="p-6 flex flex-col flex-1">
