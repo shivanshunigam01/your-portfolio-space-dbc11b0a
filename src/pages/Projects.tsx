@@ -1,4 +1,4 @@
-import { ExternalLink, Rocket } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -254,20 +254,31 @@ const Projects = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {projects.map((project, idx) => {
             const gradient = gradientPalette[idx % gradientPalette.length];
+            const cleanUrl = project.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
+            const screenshotUrl = `https://image.thum.io/get/width/1200/crop/750/noanimate/https://${cleanUrl}`;
             return (
               <Card
                 key={project.title}
                 className="group overflow-hidden rounded-2xl border border-border/60 bg-card shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
               >
-                {/* Image / gradient placeholder */}
-                <div
-                  className={`relative h-48 bg-gradient-to-br ${gradient} overflow-hidden`}
+                {/* Live website preview */}
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`relative block h-56 overflow-hidden bg-gradient-to-br ${gradient}`}
                 >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.3),transparent_50%)]" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Rocket className="h-16 w-16 text-white/90 drop-shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500" />
-                  </div>
-                  <div className="absolute top-4 left-4">
+                  <img
+                    src={screenshotUrl}
+                    alt={`${project.title} preview`}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).style.display = "none";
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/20 opacity-80 group-hover:opacity-60 transition-opacity" />
+                  <div className="absolute top-4 left-4 z-10">
                     <Badge
                       className={`${categoryStyles[project.category] ?? "bg-white/90 text-slate-800"} border-0 font-semibold shadow-sm`}
                     >
