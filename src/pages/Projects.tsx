@@ -19,6 +19,7 @@ const projects: Project[] = [
   {
     title: "Travelodeal UK",
     category: "Travel",
+    previewImage: "/projects/travelodeal-uk.png",
     url: "https://www.travelodeal.co.uk/",
     tech: [
       "Next.js",
