@@ -341,45 +341,28 @@ const Projects = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {projects.map((project, idx) => {
             const gradient = gradientPalette[idx % gradientPalette.length];
-            const cleanUrl = project.url.replace(/^https?:\/\//, "").replace(/\/$/, "");
-            // wait/{ms} ensures the page is fully loaded; viewport + fit gives a true 1:1 capture
-            const screenshotUrl = `https://image.thum.io/get/width/1200/wait/8/viewportWidth/1440/https://${cleanUrl}`;
             return (
               <Card
                 key={project.title}
                 className="group overflow-hidden rounded-2xl border border-border/60 bg-card shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
               >
-                {/* Live website preview */}
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`relative block aspect-[16/10] overflow-hidden bg-gradient-to-br ${gradient}`}
-                >
-                  <img
-                    src={screenshotUrl}
-                    alt={`${project.title} preview`}
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).style.display = "none";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-70 group-hover:opacity-40 transition-opacity" />
-                  <div className="absolute top-4 left-4 z-10">
+                {/* Live website preview with multi-provider fallback */}
+                <div className="relative">
+                  <ProjectPreview url={project.url} title={project.title} gradient={gradient} />
+                  <div className="absolute top-4 left-4 z-10 pointer-events-none">
                     <Badge
                       className={`${categoryStyles[project.category] ?? "bg-white/90 text-slate-800"} border-0 font-semibold shadow-sm`}
                     >
                       {project.category}
                     </Badge>
                   </div>
-                  <div className="absolute top-4 right-4 z-10">
+                  <div className="absolute top-4 right-4 z-10 pointer-events-none">
                     <Badge className="bg-green-500 hover:bg-green-500 text-white border-0 font-semibold shadow-sm gap-1.5">
                       <span className="h-2 w-2 rounded-full bg-white animate-pulse" />
                       Live
                     </Badge>
                   </div>
-                </a>
+                </div>
 
                 {/* Body */}
                 <div className="p-6 flex flex-col flex-1">
