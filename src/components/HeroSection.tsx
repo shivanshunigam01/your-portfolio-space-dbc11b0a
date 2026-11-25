@@ -114,11 +114,6 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-portfolio-primary/10 via-transparent to-portfolio-secondary/10 opacity-60"
-        aria-hidden
-      />
-
-      <div
         className={cn(
           "relative z-10 flex min-h-[100dvh] items-center transition-opacity duration-1000 ease-out motion-reduce:transition-none",
           "px-4 pt-[calc(4rem+env(safe-area-inset-top,0px))] pb-10 sm:px-6 sm:pt-20 lg:px-8",
@@ -126,7 +121,7 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
         )}
       >
         <div className="container mx-auto w-full min-w-0">
-          <div className="glass-panel max-w-4xl p-5 text-left sm:p-8 md:p-10">
+          <div className="max-w-4xl text-left">
             <div className="w-full min-w-0">
               {videoReady ? (
                 <div className="animate-fade-in">
@@ -139,7 +134,7 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
               )}
             </div>
 
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[rgba(255,255,255,0.92)] drop-shadow-md sm:mt-6 sm:text-lg md:text-xl lg:text-2xl">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[rgba(255,255,255,0.92)] drop-shadow-[0_2px_16px_rgba(0,0,0,0.55)] sm:mt-6 sm:text-lg md:text-xl lg:text-2xl">
               {SITE.tagline}
             </p>
 
@@ -158,7 +153,7 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
                 variant="outline"
                 size="lg"
                 asChild
-                className="glossy-outline h-12 w-full rounded-xl px-8 text-base font-semibold text-white sm:h-14 sm:w-auto sm:px-10"
+                className="h-12 w-full rounded-xl border-white/40 bg-white/10 px-8 text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/20 sm:h-14 sm:w-auto sm:px-10"
               >
                 <a href={CV_URL} download target="_blank" rel="noopener noreferrer">
                   <Download className="mr-2 h-5 w-5" />
