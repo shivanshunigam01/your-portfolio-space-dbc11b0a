@@ -39,10 +39,8 @@ const Navbar = () => {
   return (
     <nav
       aria-label="Primary"
-      className={`fixed top-0 left-0 right-0 z-50 border-b pt-[env(safe-area-inset-top,0px)] transition-[background-color,backdrop-filter,border-color] duration-300 ${
-        useSolidBar
-          ? 'bg-background/95 backdrop-blur-sm border-border'
-          : 'bg-background/15 backdrop-blur-md border-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 border-b pt-[env(safe-area-inset-top,0px)] transition-all duration-300 ${
+        useSolidBar ? 'glass-nav border-border/50' : 'glass-nav-transparent'
       }`}
     >
       <div className="container mx-auto px-3 sm:px-4">
@@ -50,7 +48,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link
             to="/"
-            className="min-w-0 truncate text-base font-bold sm:text-xl"
+            className="brand-gradient min-w-0 truncate text-base sm:text-xl"
           >
             Shivanshu Nigam
           </Link>
@@ -72,7 +70,7 @@ const Navbar = () => {
             ))}
             <Button 
               asChild 
-              className="bg-portfolio-primary hover:bg-portfolio-primary/90 text-white"
+              className="btn-gradient rounded-xl border-0 text-white shadow-glossy hover:brightness-110"
             >
               <Link to="/contact">Hire Me</Link>
             </Button>
@@ -93,7 +91,7 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden">
-            <div className="max-h-[min(70dvh,calc(100dvh-5rem))] overflow-y-auto overscroll-contain px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-card border rounded-lg mt-2 shadow-lg">
+            <div className="glass-panel mt-2 max-h-[min(70dvh,calc(100dvh-5rem))] overflow-y-auto overscroll-contain px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
@@ -111,7 +109,7 @@ const Navbar = () => {
               <div className="px-3 py-2">
                 <Button 
                   asChild 
-                  className="w-full bg-portfolio-primary hover:bg-portfolio-primary/90 text-white"
+                  className="btn-gradient w-full rounded-xl border-0 text-white shadow-glossy"
                 >
                   <Link to="/contact">Hire Me</Link>
                 </Button>

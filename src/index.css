@@ -91,33 +91,35 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 240 33% 4%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 240 28% 9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 240 28% 9%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary-foreground: 240 33% 6%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 240 22% 14%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 240 20% 12%;
+    --muted-foreground: 215 18% 68%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 260 30% 16%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 260 22% 20%;
+    --input: 260 22% 18%;
+    --ring: 268 83% 65%;
+
+    --radius: 1rem;
 
     /* Dark mode portfolio colors - slightly adjusted for better contrast */
     --portfolio-primary: 268 83% 65%;
@@ -141,10 +143,10 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
     overflow-x: clip;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      "Helvetica Neue", Arial, sans-serif;
+    font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
   }
 
@@ -231,8 +233,8 @@
 }
 
 .hover-lift:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(142, 69, 133, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px hsl(268 83% 58% / 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .hover-glow {
@@ -379,10 +381,40 @@
 .btn-gradient:hover {
   background: linear-gradient(135deg, hsl(var(--portfolio-secondary)), hsl(var(--portfolio-accent)));
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px hsl(var(--portfolio-primary) / 0.3);
+  box-shadow: 0 12px 40px hsl(var(--portfolio-primary) / 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 @layer components {
+  .premium-canvas {
+    @apply relative min-h-screen bg-background bg-premium-mesh bg-fixed;
+  }
+
+  .glass-panel {
+    @apply rounded-2xl border border-white/10 bg-black/35 shadow-glass backdrop-blur-2xl ring-1 ring-inset ring-white/10 sm:rounded-3xl;
+  }
+
+  .glass-nav {
+    @apply border-white/10 bg-background/70 shadow-[0_4px_30px_rgba(0,0,0,0.35)] backdrop-blur-xl;
+  }
+
+  .glass-nav-transparent {
+    @apply border-transparent bg-black/20 backdrop-blur-xl;
+  }
+
+  .glossy-outline {
+    @apply border border-white/25 bg-white/5 shadow-glass backdrop-blur-xl ring-1 ring-inset ring-white/10 transition-all duration-300
+      hover:border-white/40 hover:bg-white/10 hover:shadow-glow-soft;
+  }
+
+  .brand-gradient {
+    @apply bg-gradient-to-r from-white via-white to-portfolio-secondary bg-clip-text font-bold text-transparent;
+  }
+
+  .section-premium {
+    @apply relative border-b border-white/5 bg-gradient-to-b from-muted/40 via-background/80 to-background;
+  }
+
   .section-pad {
     @apply py-12 sm:py-16 lg:py-20;
   }

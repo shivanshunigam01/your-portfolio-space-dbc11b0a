@@ -15,7 +15,7 @@ export function DeveloperServicesSeoSection() {
   <>
     <section
       id="developer-services"
-      className="section-pad border-b border-border/50 bg-muted/20"
+      className="section-pad section-premium"
       aria-labelledby="developer-services-heading"
     >
       <div className="container mx-auto px-4">

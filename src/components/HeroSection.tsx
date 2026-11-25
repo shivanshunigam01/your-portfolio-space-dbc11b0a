@@ -3,20 +3,12 @@ import { ArrowRight, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { HeroTypewriterHeadline } from "@/components/HeroTypewriterHeadline";
+import { HERO_VIDEO_SOURCES } from "@/data/heroVideos";
 import { SITE } from "@/data/siteConfig";
 import { cn } from "@/lib/utils";
 
 const CV_URL =
   "https://drive.google.com/uc?export=download&id=14GSpMlwrVeJwUTsOtCt60HLvgSkqAYJj";
-
-const envHero = (key: "VITE_HERO_VIDEO_1" | "VITE_HERO_VIDEO_2", fallback: string) =>
-  import.meta.env[key]?.trim() || fallback;
-
-/** Two hero clips play back-to-back in a loop (Cloudinary CDN, or /public fallback). */
-const HERO_SOURCES = [
-  envHero("VITE_HERO_VIDEO_1", "/hero-1.mp4"),
-  envHero("VITE_HERO_VIDEO_2", "/hero-2.mp4"),
-] as const;
 
 const FALLBACK_MS = 12_000;
 
@@ -68,7 +60,7 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
 
   return (
     <section className="relative min-h-[100dvh] w-full max-w-[100vw] overflow-hidden bg-black">
-      {HERO_SOURCES.map((src, i) => (
+      {HERO_VIDEO_SOURCES.map((src, i) => (
         <video
           key={src}
           ref={(el) => {
@@ -121,6 +113,10 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
         )}
         aria-hidden
       />
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-portfolio-primary/10 via-transparent to-portfolio-secondary/10 opacity-60"
+        aria-hidden
+      />
 
       <div
         className={cn(
@@ -130,7 +126,7 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
         )}
       >
         <div className="container mx-auto w-full min-w-0">
-          <div className="max-w-4xl text-left">
+          <div className="glass-panel max-w-4xl p-5 text-left sm:p-8 md:p-10">
             <div className="w-full min-w-0">
               {videoReady ? (
                 <div className="animate-fade-in">
@@ -151,7 +147,7 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
               <Button
                 size="lg"
                 asChild
-                className="btn-gradient h-12 w-full rounded-xl px-8 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:brightness-110 sm:h-14 sm:w-auto sm:px-10"
+                className="btn-gradient h-12 w-full rounded-xl border-0 px-8 text-base font-semibold text-white shadow-glossy transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 sm:h-14 sm:w-auto sm:px-10"
               >
                 <Link to="/contact">
                   Get In Touch
@@ -162,7 +158,7 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
                 variant="outline"
                 size="lg"
                 asChild
-                className="h-12 w-full rounded-xl border-white/40 bg-white/10 px-8 text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/20 sm:h-14 sm:w-auto sm:px-10"
+                className="glossy-outline h-12 w-full rounded-xl px-8 text-base font-semibold text-white sm:h-14 sm:w-auto sm:px-10"
               >
                 <a href={CV_URL} download target="_blank" rel="noopener noreferrer">
                   <Download className="mr-2 h-5 w-5" />

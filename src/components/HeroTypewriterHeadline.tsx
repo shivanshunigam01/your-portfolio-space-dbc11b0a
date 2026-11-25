@@ -26,7 +26,7 @@ export function HeroTypewriterHeadline() {
   const { dynamicText } = useRotatingTypewriter({ phrases });
 
   return (
-    <h1 className="text-[clamp(1.625rem,5.5vw+0.5rem,4.5rem)] font-bold leading-[1.12] tracking-tight text-[#FFFFFF] max-sm:whitespace-normal sm:whitespace-nowrap drop-shadow-[0_2px_24px_rgba(0,0,0,0.45)]">
+    <h1 className="text-[clamp(1.625rem,5.5vw+0.5rem,4.5rem)] font-extrabold leading-[1.12] tracking-tight text-white max-sm:whitespace-normal sm:whitespace-nowrap drop-shadow-[0_2px_32px_rgba(0,0,0,0.6)]">
       <span className="text-[#FFFFFF]">
         {dynamicText}
         <span

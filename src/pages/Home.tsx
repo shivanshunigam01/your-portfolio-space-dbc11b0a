@@ -26,7 +26,7 @@ const Home = () => {
       {showRestOfPage && (
         <div className="animate-fade-in">
       {/* Intro Section (below hero) */}
-      <section className="section-pad border-b border-border/50">
+      <section className="section-pad section-premium">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl">
             <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
@@ -67,7 +67,7 @@ const Home = () => {
       <DeveloperServicesSeoSection />
 
       {/* About Section */}
-      <section className="section-pad bg-muted/30">
+      <section className="section-pad section-premium">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -104,7 +104,7 @@ const Home = () => {
               <img
                 src={myPhoto}
                 alt="Shivanshu Nigam — full stack developer and software engineer in Ahmedabad, India"
-                className="rounded-2xl shadow-2xl w-full max-w-md mx-auto"
+                className="mx-auto w-full max-w-md rounded-2xl shadow-glass ring-2 ring-white/10 ring-offset-2 ring-offset-background"
               />
             </div>
           </div>
@@ -300,7 +300,7 @@ const Home = () => {
       </section>
 
       {/* Featured Projects */}
-      <section className="section-pad bg-muted/30">
+      <section className="section-pad section-premium">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-bold mb-12 text-center">
             Featured Projects

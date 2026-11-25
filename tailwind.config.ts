@@ -137,7 +137,13 @@ export default {
 				'portfolio-gradient': 'linear-gradient(135deg, hsl(var(--portfolio-primary)), hsl(var(--portfolio-secondary)))',
 				'portfolio-gradient-secondary': 'linear-gradient(135deg, hsl(var(--portfolio-accent)), hsl(var(--portfolio-info)))',
 				'portfolio-gradient-accent': 'linear-gradient(135deg, hsl(var(--portfolio-pink)), hsl(var(--portfolio-orange)))',
-				'portfolio-gradient-rainbow': 'linear-gradient(135deg, hsl(var(--portfolio-primary)), hsl(var(--portfolio-secondary)), hsl(var(--portfolio-accent)), hsl(var(--portfolio-pink)))'
+				'portfolio-gradient-rainbow': 'linear-gradient(135deg, hsl(var(--portfolio-primary)), hsl(var(--portfolio-secondary)), hsl(var(--portfolio-accent)), hsl(var(--portfolio-pink)))',
+				'premium-mesh': 'radial-gradient(ellipse 90% 60% at 50% -15%, hsl(268 83% 58% / 0.18), transparent 55%), radial-gradient(ellipse 50% 40% at 100% 0%, hsl(217 91% 60% / 0.12), transparent 50%), radial-gradient(ellipse 45% 35% at 0% 80%, hsl(330 81% 60% / 0.08), transparent 50%)'
+			},
+			boxShadow: {
+				glass: '0 8px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
+				'glossy': '0 12px 40px hsl(268 83% 58% / 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.12)',
+				'glow-soft': '0 0 60px hsl(268 83% 58% / 0.12)',
 			}
 		}
 	},
