@@ -41,7 +41,7 @@ export const SITE = {
   country: "India",
   github: "https://github.com/shivanshunigam",
   linkedin: "https://linkedin.com/in/shivanshunigam",
-  defaultOgImage: "/projects/travelodeal-uk.png",
+  defaultOgImage: "/og-image.png",
   services: [
     "Full-stack web application development",
     "WhatsApp automations for business",

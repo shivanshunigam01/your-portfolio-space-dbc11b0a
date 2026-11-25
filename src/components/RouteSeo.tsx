@@ -39,6 +39,7 @@ export function RouteSeo() {
       <meta property="og:title" content={meta.title} />
       <meta property="og:description" content={meta.description} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:image:alt" content={`${SITE.name} — Full Stack Developer`} />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={meta.title} />
