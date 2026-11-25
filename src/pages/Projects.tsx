@@ -16,6 +16,8 @@ const categoryStyles: Record<string, string> = {
   Healthcare: "bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-200",
   Insurance: "bg-cyan-100 text-cyan-800 dark:bg-cyan-900/40 dark:text-cyan-200",
   Enterprise: "bg-fuchsia-100 text-fuchsia-800 dark:bg-fuchsia-900/40 dark:text-fuchsia-200",
+  Immigration:
+    "bg-sky-100 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200",
 };
 
 const gradientPalette = [

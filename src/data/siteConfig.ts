@@ -89,7 +89,7 @@ export const ROUTE_SEO: Record<string, RouteMeta> = {
   "/projects": {
     title: `Projects | ${SITE.name} — Live Apps & Client Delivery`,
     description:
-      "15+ live projects across travel, healthcare, finance, EV, and enterprise — proof of full-stack delivery, AWS-ready architecture, and business outcomes.",
+      "16+ live projects across travel, healthcare, finance, immigration, EV, and enterprise — proof of full-stack delivery, AWS-ready architecture, and business outcomes.",
     keywords: ["portfolio projects", "live web apps", ...SITE.keywords],
   },
   "/skills": {

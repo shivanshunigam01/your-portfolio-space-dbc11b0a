@@ -112,6 +112,22 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: "Nanak Migration Group",
+    category: "Immigration",
+    previewImage: "/projects/nanak-migration.png",
+    url: "https://www.nanakmigration.com.au/",
+    tech: ["Next.js", "React.js", "SEO"],
+    description:
+      "Live website for Nanak Migration Group — registered Australian migration agents (MARN 2619467) across Melbourne, Geelong, and Perth. Visa pathways, employer-sponsored skills, consultations, and trust-focused UX for immigration clients.",
+    features: [
+      "Registered migration agent branding and compliance-ready content",
+      "Visa categories: skilled, student, partner, visitor, employer-sponsored",
+      "Consultation booking and employer readiness flows",
+      "Multi-office presence across Australian cities",
+      "SEO and conversion-focused layout for immigration services",
+    ],
+  },
+  {
     title: "Amar Jyoti Upload System",
     category: "Tools",
     previewImage: "/projects/amarjyoti.png",
