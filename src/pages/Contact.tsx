@@ -84,20 +84,20 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-16">
-      <div className="container mx-auto px-4 py-16">
+    <div className="min-h-screen pt-14 sm:pt-16">
+      <div className="page-main">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">
+        <div className="text-center mb-10 sm:mb-16">
+          <h1 className="page-title mb-4">
             Get In <span className="gradient-text">Touch</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="page-lead max-w-3xl mx-auto">
             Ready to bring your ideas to life? Let's discuss how we can work together 
             to create something amazing. I'm always excited about new opportunities and collaborations.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-12">
           {/* Contact Information */}
           <div className="space-y-8">
             <div>

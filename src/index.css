@@ -135,11 +135,22 @@
     @apply border-border;
   }
 
+  html {
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
     @apply bg-background text-foreground;
+    overflow-x: clip;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
+  }
+
+  #root {
+    overflow-x: clip;
+    min-height: 100dvh;
   }
 
   h1,
@@ -369,4 +380,22 @@
   background: linear-gradient(135deg, hsl(var(--portfolio-secondary)), hsl(var(--portfolio-accent)));
   transform: translateY(-2px);
   box-shadow: 0 10px 25px hsl(var(--portfolio-primary) / 0.3);
+}
+
+@layer components {
+  .section-pad {
+    @apply py-12 sm:py-16 lg:py-20;
+  }
+
+  .page-main {
+    @apply container mx-auto px-4 py-10 sm:py-16 lg:py-20;
+  }
+
+  .page-title {
+    @apply text-3xl font-bold sm:text-4xl lg:text-5xl;
+  }
+
+  .page-lead {
+    @apply text-base sm:text-lg lg:text-xl text-muted-foreground leading-relaxed;
+  }
 }

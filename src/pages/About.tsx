@@ -4,16 +4,16 @@ import { Card } from '@/components/ui/card';
 
 const About = () => {
   return (
-    <div className="min-h-screen pt-16">
-      <div className="container mx-auto px-4 py-16">
+    <div className="min-h-screen pt-14 sm:pt-16">
+      <div className="page-main">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">
+        <div className="text-center mb-10 sm:mb-16">
+          <h1 className="page-title mb-4">
             About <span className="gradient-text">Me</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Passionate full-stack developer with a strong foundation in both front-end and back-end technologies,
-            committed to building scalable solutions that make a real impact.
+          <p className="page-lead max-w-3xl mx-auto">
+            Full stack developer and software engineer — frontend (React, Next.js) and backend (Node.js, APIs)
+            — building scalable products for startups, enterprises, and government-scale platforms in India.
           </p>
         </div>
 

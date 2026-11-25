@@ -104,14 +104,14 @@ const Skills = () => {
   };
 
   return (
-    <div className="min-h-screen pt-16">
-      <div className="container mx-auto px-4 py-16">
+    <div className="min-h-screen pt-14 sm:pt-16">
+      <div className="page-main">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">
+        <div className="text-center mb-10 sm:mb-16">
+          <h1 className="page-title mb-4">
             Technical <span className="gradient-text">Skills</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="page-lead max-w-3xl mx-auto">
             A comprehensive overview of my technical expertise across full-stack
             development, database management, cloud technologies, and modern
             development practices.

@@ -21,6 +21,10 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, [location.pathname]);
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
@@ -34,16 +38,20 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 border-b transition-[background-color,backdrop-filter,border-color] duration-300 ${
+      aria-label="Primary"
+      className={`fixed top-0 left-0 right-0 z-50 border-b pt-[env(safe-area-inset-top,0px)] transition-[background-color,backdrop-filter,border-color] duration-300 ${
         useSolidBar
           ? 'bg-background/95 backdrop-blur-sm border-border'
           : 'bg-background/15 backdrop-blur-md border-transparent'
       }`}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+      <div className="container mx-auto px-3 sm:px-4">
+        <div className="flex items-center justify-between gap-2 h-14 sm:h-16">
           {/* Logo */}
-          <Link to="/" className="text-xl font-bold">
+          <Link
+            to="/"
+            className="min-w-0 truncate text-base font-bold sm:text-xl"
+          >
             Shivanshu Nigam
           </Link>
 
@@ -85,7 +93,7 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-card border rounded-lg mt-2">
+            <div className="max-h-[min(70dvh,calc(100dvh-5rem))] overflow-y-auto overscroll-contain px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-card border rounded-lg mt-2 shadow-lg">
               {navItems.map((item) => (
                 <Link
                   key={item.name}

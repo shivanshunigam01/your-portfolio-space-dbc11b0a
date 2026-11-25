@@ -3,8 +3,18 @@ import { useEffect, useState } from "react";
 export const DEFAULT_HERO_PHRASES = [
   "Hi, I'm Shivanshu",
   "Hi, I'm a Full Stack Developer",
-  "Hi, I build Scalable Web Applications",
-  "Hi, I automate with AI & n8n",
+  "Hi, I build WhatsApp Business Automations",
+  "Hi, I deploy on AWS & DevOps",
+  "Hi, I grow startups with tech & visibility",
+] as const;
+
+/** Shorter lines so the hero headline fits narrow viewports without horizontal scrolling */
+export const MOBILE_HERO_PHRASES = [
+  "Hi, I'm Shivanshu",
+  "Full Stack Developer",
+  "WhatsApp Automations",
+  "AWS & DevOps",
+  "Tech for Every Business",
 ] as const;
 
 export type RotatingTypewriterOptions = {

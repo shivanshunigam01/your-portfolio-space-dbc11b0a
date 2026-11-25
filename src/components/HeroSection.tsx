@@ -3,13 +3,20 @@ import { ArrowRight, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { HeroTypewriterHeadline } from "@/components/HeroTypewriterHeadline";
+import { SITE } from "@/data/siteConfig";
 import { cn } from "@/lib/utils";
 
 const CV_URL =
   "https://drive.google.com/uc?export=download&id=14GSpMlwrVeJwUTsOtCt60HLvgSkqAYJj";
 
-/** Two hero clips play back-to-back in a loop (files in /public). */
-const HERO_SOURCES = ["/hero-1.mp4", "/hero-2.mp4"] as const;
+const envHero = (key: "VITE_HERO_VIDEO_1" | "VITE_HERO_VIDEO_2", fallback: string) =>
+  import.meta.env[key]?.trim() || fallback;
+
+/** Two hero clips play back-to-back in a loop (Cloudinary CDN, or /public fallback). */
+const HERO_SOURCES = [
+  envHero("VITE_HERO_VIDEO_1", "/hero-1.mp4"),
+  envHero("VITE_HERO_VIDEO_2", "/hero-2.mp4"),
+] as const;
 
 const FALLBACK_MS = 12_000;
 
@@ -60,7 +67,7 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
   }, [unlock]);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-black">
+    <section className="relative min-h-[100dvh] w-full max-w-[100vw] overflow-hidden bg-black">
       {HERO_SOURCES.map((src, i) => (
         <video
           key={src}
@@ -74,7 +81,8 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
           playsInline
           preload="auto"
           className={cn(
-            "absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out",
+            "absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-700 ease-out",
+            "scale-[1.08] sm:scale-100",
             activeLayer === i ? "z-[2] opacity-100" : "z-[1] opacity-0",
           )}
           onLoadedData={() => {
@@ -93,14 +101,15 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
 
       <div
         className={cn(
-          "absolute inset-0 bg-black/55 transition-opacity duration-1000 ease-out",
+          "absolute inset-0 bg-black/60 transition-opacity duration-1000 ease-out sm:bg-black/55",
           videoReady ? "opacity-100" : "opacity-0",
         )}
         aria-hidden
       />
       <div
         className={cn(
-          "absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-black/25 transition-opacity duration-1000 ease-out",
+          "absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/40 transition-opacity duration-1000 ease-out",
+          "sm:bg-gradient-to-r sm:from-black/75 sm:via-black/40 sm:to-black/25",
           videoReady ? "opacity-100" : "opacity-0",
         )}
         aria-hidden
@@ -115,33 +124,34 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
 
       <div
         className={cn(
-          "relative z-10 flex min-h-screen items-center transition-opacity duration-1000 ease-out motion-reduce:transition-none",
+          "relative z-10 flex min-h-[100dvh] items-center transition-opacity duration-1000 ease-out motion-reduce:transition-none",
+          "px-4 pt-[calc(4rem+env(safe-area-inset-top,0px))] pb-10 sm:px-6 sm:pt-20 lg:px-8",
           videoReady ? "opacity-100" : "opacity-0",
         )}
       >
-        <div className="container mx-auto w-full px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto w-full min-w-0">
           <div className="max-w-4xl text-left">
-            <div className="w-full min-w-0 overflow-x-auto pb-1 [-webkit-overflow-scrolling:touch] sm:overflow-visible">
+            <div className="w-full min-w-0">
               {videoReady ? (
                 <div className="animate-fade-in">
                   <HeroTypewriterHeadline />
                 </div>
               ) : (
-                <h1 className="whitespace-nowrap text-4xl font-bold leading-[1.15] tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
+                <h1 className="text-[clamp(1.625rem,5.5vw+0.5rem,4.5rem)] font-bold leading-[1.12] tracking-tight text-transparent">
                   &nbsp;
                 </h1>
               )}
             </div>
 
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[rgba(255,255,255,0.92)] drop-shadow-md sm:text-xl md:text-2xl">
-              Building scalable web applications designed for performance, growth, and real-world usage.
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[rgba(255,255,255,0.92)] drop-shadow-md sm:mt-6 sm:text-lg md:text-xl lg:text-2xl">
+              {SITE.tagline}
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:items-center sm:gap-4">
               <Button
                 size="lg"
                 asChild
-                className="btn-gradient h-12 rounded-xl px-8 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:brightness-110 sm:h-14 sm:px-10"
+                className="btn-gradient h-12 w-full rounded-xl px-8 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:brightness-110 sm:h-14 sm:w-auto sm:px-10"
               >
                 <Link to="/contact">
                   Get In Touch
@@ -152,7 +162,7 @@ const HeroSection = ({ onVideoReady }: HeroSectionProps) => {
                 variant="outline"
                 size="lg"
                 asChild
-                className="h-12 rounded-xl border-white/40 bg-white/10 px-8 text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/20 sm:h-14 sm:px-10"
+                className="h-12 w-full rounded-xl border-white/40 bg-white/10 px-8 text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/20 sm:h-14 sm:w-auto sm:px-10"
               >
                 <a href={CV_URL} download target="_blank" rel="noopener noreferrer">
                   <Download className="mr-2 h-5 w-5" />

@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import HeroSection from "@/components/HeroSection";
+import { DeveloperServicesSeoSection } from "@/components/DeveloperServicesSeoSection";
 import myPhoto from "../pages/my_image.png";
 
 const Home = () => {
@@ -25,14 +26,15 @@ const Home = () => {
       {showRestOfPage && (
         <div className="animate-fade-in">
       {/* Intro Section (below hero) */}
-      <section className="py-20 border-b border-border/50">
+      <section className="section-pad border-b border-border/50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl">
             <p className="text-lg lg:text-xl text-muted-foreground mb-8 leading-relaxed">
-              I'm a Full Stack Developer who specializes in building scalable
-              web applications that serve millions of users. I work with modern
-              technologies like React.js, Node.js, and have experience in
-              government projects and renewable energy solutions.
+              I'm Full Stack Developer Shivanshu Nigam — I build scalable web
+              apps, WhatsApp automations for business, AWS deployment & DevOps,
+              and end-to-end technical solutions for startups and companies in every
+              sector. From government-scale platforms to social-media-ready products
+              that improve your visibility and growth.
             </p>
             <div className="flex gap-6">
               <a
@@ -62,8 +64,10 @@ const Home = () => {
         </div>
       </section>
 
+      <DeveloperServicesSeoSection />
+
       {/* About Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="section-pad bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
@@ -99,7 +103,7 @@ const Home = () => {
             <div className="relative">
               <img
                 src={myPhoto}
-                alt="Shivanshu Nigam"
+                alt="Shivanshu Nigam — full stack developer and software engineer in Ahmedabad, India"
                 className="rounded-2xl shadow-2xl w-full max-w-md mx-auto"
               />
             </div>
@@ -108,7 +112,7 @@ const Home = () => {
       </section>
 
       {/* Experience Highlights */}
-      <section className="py-20">
+      <section className="section-pad">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-bold mb-12 text-center">
             Experience
@@ -296,7 +300,7 @@ const Home = () => {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-20 bg-muted/30">
+      <section className="section-pad bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl lg:text-4xl font-bold mb-12 text-center">
             Featured Projects
@@ -361,29 +365,29 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20">
+      <section className="section-pad">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
               Let's Work Together
             </h2>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-2xl mx-auto px-1">
               I'm always excited about new opportunities and collaborations.
               Let's discuss how we can work together to create something
               amazing.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Link to="/contact">
+            <div className="mx-auto flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center sm:gap-4 mb-8">
+              <Link to="/contact" className="w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="bg-portfolio-primary hover:bg-portfolio-primary/90 text-white"
+                  className="w-full bg-portfolio-primary hover:bg-portfolio-primary/90 text-white sm:w-auto"
                 >
                   Get In Touch
                   <Mail className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
                 <a href="tel:+917247650665">
                   <Phone className="mr-2 h-4 w-4" />
                   Call Me
@@ -391,14 +395,14 @@ const Home = () => {
               </Button>
             </div>
 
-            <div className="flex items-center justify-center gap-6 text-muted-foreground">
+            <div className="flex flex-col items-center justify-center gap-3 text-center text-sm text-muted-foreground sm:flex-row sm:flex-wrap sm:gap-6 sm:text-base">
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4" />
+                <MapPin className="h-4 w-4 shrink-0" />
                 <span>Ahmedabad, India</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4" />
-                <span>shivanshunigam8@gmail.com</span>
+              <div className="flex min-w-0 items-center justify-center gap-2 px-2">
+                <Mail className="h-4 w-4 shrink-0" />
+                <span className="break-all sm:break-normal">shivanshunigam8@gmail.com</span>
               </div>
             </div>
           </div>

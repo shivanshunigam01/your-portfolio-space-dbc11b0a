@@ -182,14 +182,14 @@ const Experience = () => {
   };
 
   return (
-    <div className="min-h-screen pt-16">
-      <div className="container mx-auto px-4 py-16">
+    <div className="min-h-screen pt-14 sm:pt-16">
+      <div className="page-main">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">
+        <div className="text-center mb-10 sm:mb-16">
+          <h1 className="page-title mb-4">
             Work <span className="gradient-text">Experience</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="page-lead max-w-3xl mx-auto">
             A journey through impactful roles in software development, from
             government initiatives to AI training, consistently delivering
             scalable solutions and measurable results.
@@ -199,34 +199,38 @@ const Experience = () => {
         {/* Experience Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-portfolio-primary to-portfolio-secondary"></div>
+          <div className="absolute left-4 sm:left-8 top-0 bottom-0 hidden w-0.5 bg-gradient-to-b from-portfolio-primary to-portfolio-secondary sm:block"></div>
 
-          <div className="space-y-12">
-            {experiences.map((exp, index) => (
+          <div className="space-y-8 sm:space-y-12">
+            {experiences.map((exp) => (
               <div key={exp.id} className="relative">
                 {/* Timeline Dot */}
-                <div className="absolute left-6 w-4 h-4 bg-portfolio-primary rounded-full border-4 border-background shadow-lg"></div>
+                <div className="absolute left-2.5 top-6 hidden h-4 w-4 rounded-full border-4 border-background bg-portfolio-primary shadow-lg sm:left-6 sm:block"></div>
 
-                <div className="ml-16">
-                  <Card className="p-6 hover-lift">
+                <div className="sm:ml-16">
+                  <Card className="p-4 sm:p-6 hover-lift">
                     {/* Header */}
-                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
-                      <div>
-                        <h3 className="text-xl font-semibold mb-1">
+                    <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                      <div className="min-w-0">
+                        <h3 className="text-lg font-semibold sm:text-xl mb-1">
                           {exp.role}
                         </h3>
-                        <div className="flex items-center text-portfolio-primary font-medium mb-2">
-                          <Building2 className="h-4 w-4 mr-2" />
-                          {exp.company}
+                        <div className="flex items-center text-portfolio-primary font-medium mb-2 text-sm sm:text-base">
+                          <Building2 className="h-4 w-4 mr-2 shrink-0" />
+                          <span className="break-words">{exp.company}</span>
                         </div>
-                        <div className="flex items-center text-muted-foreground text-sm">
-                          <MapPin className="h-4 w-4 mr-2" />
-                          {exp.location}
-                          <Calendar className="h-4 w-4 ml-4 mr-2" />
-                          {exp.period}
+                        <div className="flex flex-col gap-1 text-muted-foreground text-sm sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-4">
+                          <span className="inline-flex items-center">
+                            <MapPin className="h-4 w-4 mr-2 shrink-0" />
+                            {exp.location}
+                          </span>
+                          <span className="inline-flex items-center">
+                            <Calendar className="h-4 w-4 mr-2 shrink-0" />
+                            {exp.period}
+                          </span>
                         </div>
                       </div>
-                      <Badge className={getTypeColor(exp.type)}>
+                      <Badge className={`${getTypeColor(exp.type)} self-start shrink-0`}>
                         {exp.type}
                       </Badge>
                     </div>
@@ -324,8 +328,8 @@ const Experience = () => {
         </div>
 
         {/* Career Highlights */}
-        <div className="mt-16">
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-8">
+        <div className="mt-12 sm:mt-16">
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 rounded-2xl p-6 sm:p-8">
             <h2 className="text-2xl font-semibold mb-6 text-center">
               Career Highlights
             </h2>
